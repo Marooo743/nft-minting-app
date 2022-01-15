@@ -5,8 +5,10 @@ import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
 
+
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
+
 
 export const StyledButton = styled.button`
   padding: 10px;
@@ -65,6 +67,15 @@ export const ResponsiveWrapper = styled.div`
   }
 `;
 
+export const rm = styled.img`
+width: 767px;
+@media (min-width: 767px) {
+  width: 700px;
+}
+transition: width 0.5s;
+transition: height 0.5s;
+`;
+
 export const StyledLogo = styled.img`
   width: 200px;
   @media (min-width: 767px) {
@@ -76,7 +87,7 @@ export const StyledLogo = styled.img`
 
 export const StyledImg = styled.img`
   box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
-  border: 4px dashed var(--secondary);
+  
   background-color: var(--accent);
   border-radius: 100%;
   width: 200px;
@@ -162,8 +173,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 50) {
-      newMintAmount = 50;
+    if (newMintAmount > 10) {
+      newMintAmount = 10;
     }
     setMintAmount(newMintAmount);
   };
@@ -194,7 +205,8 @@ function App() {
   }, [blockchain.account]);
 
   return (
-    <s.Screen>
+    <s.Screen image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}>
+      
       <s.Container
         flex={1}
         ai={"center"}
@@ -202,7 +214,7 @@ function App() {
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
         <a href={CONFIG.MARKETPLACE_LINK}>
-          <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
+          <StyledLogo alt={"logo"} src={"/config/images/Os600400.png"} />
         </a>
         <s.SpacerSmall />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
@@ -218,7 +230,6 @@ function App() {
               backgroundColor: "var(--accent)",
               padding: 24,
               borderRadius: 24,
-              border: "4px dashed var(--secondary)",
               boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
             }}
           >
@@ -247,16 +258,6 @@ function App() {
                 textAlign: "center",
               }}
             >
-              <StyledButton
-                onClick={(e) => {
-                  window.open("/config/roadmap.pdf", "_blank");
-                }}
-                style={{
-                  margin: "5px",
-                }}
-              >
-                Roadmap
-              </StyledButton>
               <StyledButton
                 style={{
                   margin: "5px",
@@ -399,38 +400,45 @@ function App() {
           </s.Container>
           <s.SpacerLarge />
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg
-              alt={"example"}
-              src={"/config/images/example.gif"}
-              style={{ transform: "scaleX(-1)" }}
-            />
+            
           </s.Container>
         </ResponsiveWrapper>
         <s.SpacerMedium />
+
         <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
-          <s.TextDescription
-            style={{
-              textAlign: "center",
-              color: "var(--primary-text)",
-            }}
-          >
-            Please make sure you are connected to the right network (
-            {CONFIG.NETWORK.NAME} Mainnet) and the correct address. Please note:
-            Once you make the purchase, you cannot undo this action.
-          </s.TextDescription>
+        <s.rm
+        alt={"rm"}
+        src={"/config/images/Roadmap.png"}
+          />
           <s.SpacerSmall />
-          <s.TextDescription
-            style={{
-              textAlign: "center",
-              color: "var(--primary-text)",
-            }}
-          >
-            We have set the gas limit to {CONFIG.GAS_LIMIT} for the contract to
-            successfully mint your NFT. We recommend that you don't lower the
-            gas limit.
-          </s.TextDescription>
+        </s.Container>
+        <s.SpacerMedium />
+
+        <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
+        <s.rm
+        alt={"rm"}
+        src={"/config/images/why.png"}
+          />
+          <s.SpacerSmall />
         </s.Container>
       </s.Container>
+      <s.TextDescription
+            style={{
+              textAlign: "left",
+              color: "var(--primary-text)",
+            }}
+          >
+            ©Moons DAO 2021 All rights reserved
+          </s.TextDescription>
+          <div style={{ display: "inherit" }}>
+          <a href = {"https://twitter.com/MoonsDAO"}>
+          <img src= {"/config/images/twitter.png"} alt= 'icon' />
+          </a>
+          <s.SpacerSmall />
+          <a href = {"https://discord.gg/zrdNpkrarC"}>
+          <img src= {"/config/images/discord.png"} alt= 'icon' />
+          </a>
+        </div> 
     </s.Screen>
   );
 }

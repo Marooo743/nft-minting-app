@@ -1,5 +1,6 @@
 import styled from "styled-components";
-
+export const twi = styled.a`
+`;
 // Used for wrapping a page component
 export const Screen = styled.div`
   background-color: var(--primary);
@@ -11,7 +12,14 @@ export const Screen = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
+export const rm = styled.img`
+width: 767px;
+@media (min-width: 767px) {
+  width: 700px;
+}
+transition: width 0.5s;
+transition: height 0.5s;
+`;
 // Used for providing space between components
 export const SpacerXSmall = styled.div`
   height: 8px;
